@@ -525,10 +525,10 @@ function App() {
       {/* ================= AUDIO ================= */}
 
       <audio
-        ref={audioRef}
-        src={song.file}
-        preload="metadata"
-      />
+  ref={audioRef}
+  src={song.src}
+  preload="metadata"
+/>
 
 
       {/* ================= MUSIC PLAYER ================= */}
