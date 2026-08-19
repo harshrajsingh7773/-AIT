@@ -1,7 +1,45 @@
 import { useEffect, useRef, useState } from "react";
+import { initializeApp } from "firebase/app";
+import {
+  getDatabase,
+  ref,
+  push,
+  set,
+  onDisconnect,
+  onValue,
+  serverTimestamp,
+} from "firebase/database";
+
+/* =========================================================
+   FIREBASE CONFIG
+========================================================= */
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDqnVcr7sQSZNB2wm0F7a__TzywfBzlSo",
+  authDomain: "hard-ait.firebaseapp.com",
+  databaseURL: "https://hard-ait-default-rtdb.firebaseio.com",
+  projectId: "hard-ait",
+  storageBucket: "hard-ait.firebasestorage.app",
+  messagingSenderId: "958826862416",
+  appId: "1:958826862416:web:42cbb7500451c3c73e55",
+  measurementId: "G-46SH0SFDK",
+};
+
+/* =========================================================
+   INITIALIZE FIREBASE
+========================================================= */
+
+const firebaseApp = initializeApp(firebaseConfig);
+const database = getDatabase(firebaseApp);
+
+/* =========================================================
+   APP
+========================================================= */
 
 function App() {
-  /* ================= TIME ================= */
+  /* =======================================================
+     TIME
+  ======================================================= */
 
   const [time, setTime] = useState("");
 
@@ -26,171 +64,211 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  /* ================= SONGS ================= */
+  /* =======================================================
+     SONGS
+  ======================================================= */
 
- const songs = [
-  {
-    id: 1,
-    title: "Anyway",
-    artist: "ANYWAY",
-    src: "/Anyway - ANYWAY (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 2,
-    title: "Arhe So Jhde",
-    artist: "ANYWAY",
-    src: "/Arhe So Jhde - ANYWAY (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 3,
-    title: "Bholi Si Surat",
-    artist: "Dil To Pagal Hai",
-    src: "/Bholi Si Surat - Dil To Pagal Hai (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 4,
-    title: "California Love",
-    artist: "ANYWAY",
-    src: "/California Love - ANYWAY (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 5,
-    title: "Chaal Patlo",
-    artist: "Jass Dhaliwal & Rouble Malhi",
-    src: "/Chaal Patlo - Jass Dhaliwal & Rouble Malhi (Mr-Punjab.Com).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 6,
-    title: "Cheema Y (Intro)",
-    artist: "ANYWAY",
-    src: "/Cheema Y (Intro) - ANYWAY (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 7,
-    title: "Dhadkan",
-    artist: "Romy Ranjan",
-    src: "/Dhadkan - Romy Ranjan.mp3",
-    image: "/im.png",
-  },
-  {
-    id: 8,
-    title: "Dil To Pagal Hai",
-    artist: "Dil To Pagal Hai",
-    src: "/Dil To Pagal Hai - Dil To Pagal Hai (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 9,
-    title: "EX-FILES",
-    artist: "Baggh-E SMG",
-    src: "/EX-FILES - Baggh-E SMG.mp3",
-    image: "/im.png",
-  },
-  {
-    id: 10,
-    title: "Feem Feem",
-    artist: "Sardar Khehra & Gur Brar & Rahul Sidhu",
-    src: "/Feem Feem - Sardar Khehra & Gur Brar & Rahul Sidhu (Mr-Punjab.Com).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 11,
-    title: "Freestyle",
-    artist: "Jas Dhaliwal",
-    src: "/Freestyle - Jas Dhaliwal (Mr-Punjab.Com).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 12,
-    title: "Gun Culture",
-    artist: "Cloud 9",
-    src: "/Gun Culture - Cloud 9 (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 13,
-    title: "Haske",
-    artist: "Cloud 9",
-    src: "/Haske - Cloud 9 (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 14,
-    title: "Jogi",
-    artist: "Jxggi & Hxrmxn",
-    src: "/Jogi - Jxggi & Hxrmxn (Mr-Punjab.Com).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 15,
-    title: "Khat",
-    artist: "Khat",
-    src: "/Khat - Khat (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 16,
-    title: "Koi Ladki Hai",
-    artist: "Dil To Pagal Hai",
-    src: "/Koi Ladki Hai - Dil To Pagal Hai (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 17,
-    title: "Malpur De Munde",
-    artist: "Singga",
-    src: "/Malpur De Munde - Singga (Mr-Punjab.Com).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 18,
-    title: "NYPD",
-    artist: "F.A.T.H.E.R",
-    src: "/NYPD - F.A.T.H.E.R (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 19,
-    title: "Proper Patola",
-    artist: "Proper Patola",
-    src: "/Proper Patola - Proper Patola (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 20,
-    title: "Snap",
-    artist: "Cloud 9",
-    src: "/Snap - Cloud 9 (320 kbps).mp3",
-    image: "/im.png",
-  },
-  {
-    id: 21,
-    title: "Tequila Shot",
-    artist: "Proper Patola",
-    src: "/Tequila Shot - Proper Patola (320 kbps).mp3",
-    image: "/im.png",
-  },
-];
+  const songs = [
+    {
+      title: "Anyway",
+      artist: "ANYWAY",
+      file: "/Anyway - ANYWAY (320 kbps).mp3",
+    },
 
-  /* ================= MUSIC STATE ================= */
+    {
+      title: "Arhe So Jhde",
+      artist: "ANYWAY",
+      file: "/Arhe So Jhde - ANYWAY (320 kbps).mp3",
+    },
+
+    {
+      title: "Bholi Si Surat",
+      artist: "Dil To Pagal Hai",
+      file: "/Bholi Si Surat - Dil To Pagal Hai (320 kbps).mp3",
+    },
+
+    {
+      title: "California Love",
+      artist: "ANYWAY",
+      file: "/California Love - ANYWAY (320 kbps).mp3",
+    },
+
+    {
+      title: "Chaal Patlo",
+      artist: "Jass Dhaliwal & Rouble Malhi",
+      file: "/Chaal Patlo - Jass Dhaliwal & Rouble Malhi (Mr-Punjab.Com).mp3",
+    },
+
+    {
+      title: "Cheema Y Intro",
+      artist: "ANYWAY",
+      file: "/Cheema Y (Intro) - ANYWAY (320 kbps).mp3",
+    },
+
+    {
+      title: "Dhadkan",
+      artist: "Romy Ranjan",
+      file: "/Dhadkan - Romy Ranjan.mp3",
+    },
+
+    {
+      title: "Dil To Pagal Hai",
+      artist: "Dil To Pagal Hai",
+      file: "/Dil To Pagal Hai - Dil To Pagal Hai (320 kbps).mp3",
+    },
+
+    {
+      title: "EX-FILES",
+      artist: "Baggh-E SMG",
+      file: "/EX-FILES - Baggh-E SMG.mp3",
+    },
+
+    {
+      title: "Feem Feem",
+      artist: "Sardar Khehra & Gur Brar & Rahul Sidhu",
+      file: "/Feem Feem - Sardar Khehra & Gur Brar & Rahul Sidhu (Mr-Punjab.Com).mp3",
+    },
+
+    {
+      title: "Freestyle",
+      artist: "Jas Dhaliwal",
+      file: "/Freestyle - Jas Dhaliwal (Mr-Punjab.Com).mp3",
+    },
+
+    {
+      title: "Gun Culture",
+      artist: "Cloud 9",
+      file: "/Gun Culture - Cloud 9 (320 kbps).mp3",
+    },
+
+    {
+      title: "Haske",
+      artist: "Cloud 9",
+      file: "/Haske - Cloud 9 (320 kbps).mp3",
+    },
+
+    {
+      title: "Jogi",
+      artist: "Jxggi & Hxrmxn",
+      file: "/Jogi - Jxggi & Hxrmxn (Mr-Punjab.Com).mp3",
+    },
+
+    {
+      title: "Khat",
+      artist: "Khat",
+      file: "/Khat - Khat (320 kbps).mp3",
+    },
+
+    {
+      title: "Koi Ladki Hai",
+      artist: "Dil To Pagal Hai",
+      file: "/Koi Ladki Hai - Dil To Pagal Hai (320 kbps).mp3",
+    },
+
+    {
+      title: "Malpur De Munde",
+      artist: "Singga",
+      file: "/Malpur De Munde - Singga (Mr-Punjab.Com).mp3",
+    },
+
+    {
+      title: "NYPD",
+      artist: "F.A.T.H.E.R",
+      file: "/NYPD - F.A.T.H.E.R (320 kbps).mp3",
+    },
+
+    {
+      title: "Proper Patola",
+      artist: "Proper Patola",
+      file: "/Proper Patola - Proper Patola (320 kbps).mp3",
+    },
+
+    {
+      title: "Snap",
+      artist: "Cloud 9",
+      file: "/Snap - Cloud 9 (320 kbps).mp3",
+    },
+
+    {
+      title: "Tequila Shot",
+      artist: "Proper Patola",
+      file: "/Tequila Shot - Proper Patola (320 kbps).mp3",
+    },
+  ];
+
+  /* =======================================================
+     MUSIC STATE
+  ======================================================= */
 
   const audioRef = useRef(null);
 
   const [currentSong, setCurrentSong] = useState(0);
+
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [currentTime, setCurrentTime] = useState(0);
+
   const [duration, setDuration] = useState(0);
 
   const song = songs[currentSong];
 
-  /* ================= LOAD SONG ================= */
+  /* =======================================================
+     REAL ONLINE USERS - FIREBASE
+  ======================================================= */
+
+  const [onlineUsers, setOnlineUsers] = useState(0);
+
+  useEffect(() => {
+    const presenceRef = ref(database, "presence");
+
+    /*
+      Create a unique connection for this browser tab.
+    */
+    const myConnectionRef = push(presenceRef);
+
+    /*
+      Automatically remove this user when they disconnect.
+    */
+    onDisconnect(myConnectionRef)
+      .remove()
+      .catch((error) => {
+        console.error("Disconnect error:", error);
+      });
+
+    /*
+      Add this visitor.
+    */
+    set(myConnectionRef, {
+      connectedAt: serverTimestamp(),
+    }).catch((error) => {
+      console.error("Presence error:", error);
+    });
+
+    /*
+      Listen to everyone currently online.
+    */
+    const unsubscribe = onValue(presenceRef, (snapshot) => {
+      const data = snapshot.val();
+
+      if (!data) {
+        setOnlineUsers(0);
+        return;
+      }
+
+      setOnlineUsers(Object.keys(data).length);
+    });
+
+    /*
+      Cleanup listener.
+    */
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  /* =======================================================
+     LOAD SONG
+  ======================================================= */
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -208,13 +286,16 @@ function App() {
         .then(() => {
           setIsPlaying(true);
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log("Audio play error:", error);
           setIsPlaying(false);
         });
     }
   }, [currentSong]);
 
-  /* ================= AUDIO EVENTS ================= */
+  /* =======================================================
+     AUDIO EVENTS
+  ======================================================= */
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -240,17 +321,23 @@ function App() {
     };
 
     audio.addEventListener("timeupdate", updateProgress);
+
     audio.addEventListener("loadedmetadata", updateDuration);
+
     audio.addEventListener("ended", handleEnded);
 
     return () => {
       audio.removeEventListener("timeupdate", updateProgress);
+
       audio.removeEventListener("loadedmetadata", updateDuration);
+
       audio.removeEventListener("ended", handleEnded);
     };
   }, []);
 
-  /* ================= PLAY / PAUSE ================= */
+  /* =======================================================
+     PLAY / PAUSE
+  ======================================================= */
 
   const togglePlay = () => {
     const audio = audioRef.current;
@@ -259,6 +346,7 @@ function App() {
 
     if (isPlaying) {
       audio.pause();
+
       setIsPlaying(false);
     } else {
       audio
@@ -272,7 +360,9 @@ function App() {
     }
   };
 
-  /* ================= PREVIOUS ================= */
+  /* =======================================================
+     PREVIOUS SONG
+  ======================================================= */
 
   const previousSong = () => {
     setCurrentSong((prev) => {
@@ -286,7 +376,9 @@ function App() {
     setIsPlaying(true);
   };
 
-  /* ================= NEXT ================= */
+  /* =======================================================
+     NEXT SONG
+  ======================================================= */
 
   const nextSong = () => {
     setCurrentSong((prev) => {
@@ -300,7 +392,9 @@ function App() {
     setIsPlaying(true);
   };
 
-  /* ================= SEEK ================= */
+  /* =======================================================
+     SEEK
+  ======================================================= */
 
   const handleSeek = (e) => {
     const newTime = Number(e.target.value);
@@ -314,7 +408,9 @@ function App() {
     setCurrentTime(newTime);
   };
 
-  /* ================= FORMAT TIME ================= */
+  /* =======================================================
+     FORMAT TIME
+  ======================================================= */
 
   const formatTime = (seconds) => {
     if (!seconds || isNaN(seconds)) {
@@ -328,6 +424,10 @@ function App() {
     return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
   };
 
+  /* =======================================================
+     UI
+  ======================================================= */
+
   return (
     <div
       className="relative h-screen w-full overflow-hidden bg-cover bg-center"
@@ -335,83 +435,86 @@ function App() {
         backgroundImage: "url('/ait-campus.png.png')",
       }}
     >
+      {/* =================================================
+          CUSTOM ANIMATIONS
+      ================================================= */}
 
-      {/* ================= SMOOTH CLOCK ================= */}
+      <style>
+        {`
+          @keyframes smoothBlink {
+            0%,
+            42% {
+              opacity: 1;
+            }
 
-     <style>
-  {`
-    @keyframes smoothBlink {
-      0%,
-      42% {
-        opacity: 1;
-      }
+            50% {
+              opacity: 0.15;
+            }
 
-      50% {
-        opacity: 0.15;
-      }
+            58%,
+            100% {
+              opacity: 1;
+            }
+          }
 
-      58%,
-      100% {
-        opacity: 1;
-      }
-    }
+          .clock-colon {
+            animation: smoothBlink 1.2s ease-in-out infinite;
+          }
 
-    .clock-colon {
-      animation: smoothBlink 1.2s ease-in-out infinite;
-    }
+          .music-disc {
+            animation: rotateDisc 8s linear infinite;
+            animation-play-state: paused;
+          }
 
-    .music-disc {
-      animation: rotateDisc 8s linear infinite;
-      animation-play-state: paused;
-    }
+          .music-disc.playing {
+            animation-play-state: running;
+          }
 
-    .music-disc.playing {
-      animation-play-state: running;
-    }
+          @keyframes rotateDisc {
+            from {
+              transform: rotate(0deg);
+            }
 
-    @keyframes rotateDisc {
-      from {
-        transform: rotate(0deg);
-      }
+            to {
+              transform: rotate(360deg);
+            }
+          }
 
-      to {
-        transform: rotate(360deg);
-      }
-    }
+          input[type="range"] {
+            appearance: none;
+            -webkit-appearance: none;
+          }
 
-    input[type="range"] {
-      appearance: none;
-      -webkit-appearance: none;
-    }
+          input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 0;
+            height: 0;
+          }
 
-    input[type="range"]::-webkit-slider-thumb {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 0;
-      height: 0;
-    }
+          input[type="range"]::-moz-range-thumb {
+            width: 0;
+            height: 0;
+            border: 0;
+          }
+        `}
+      </style>
 
-    input[type="range"]::-moz-range-thumb {
-      width: 0;
-      height: 0;
-      border: 0;
-    }
-  `}
-</style>
-
-      {/* ================= DARK OVERLAY ================= */}
+      {/* =================================================
+          DARK OVERLAY
+      ================================================= */}
 
       <div className="absolute inset-0 bg-black/10" />
 
-
-      {/* ================= NAVBAR ================= */}
+      {/* =================================================
+          NAVBAR
+      ================================================= */}
 
       <nav className="absolute left-0 top-0 z-50 flex w-full items-center justify-between px-6 py-5 text-white">
 
         {/* TIME */}
 
         <div className="text-sm font-medium tracking-wide">
-
           <span>
             {time.split(":")[0]}
 
@@ -421,9 +524,7 @@ function App() {
 
             {time.split(":")[1]}
           </span>
-
         </div>
-
 
         {/* ONLINE */}
 
@@ -432,13 +533,12 @@ function App() {
           <span className="h-2.5 w-2.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,1)]" />
 
           <span>
-            2 online
+            {onlineUsers} online
           </span>
 
         </div>
 
-
-        {/* ================= RIGHT MUSIC LINKS ================= */}
+        {/* RIGHT MUSIC LINKS */}
 
         <div className="ml-auto flex items-center gap-7">
 
@@ -450,13 +550,11 @@ function App() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-white transition hover:opacity-70"
           >
-
             <svg
               className="h-5 w-5"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
-
               <circle
                 cx="12"
                 cy="12"
@@ -486,15 +584,12 @@ function App() {
                 fill="none"
                 strokeLinecap="round"
               />
-
             </svg>
 
             <span>
               Spotify
             </span>
-
           </a>
-
 
           {/* YOUTUBE MUSIC */}
 
@@ -504,13 +599,11 @@ function App() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-white transition hover:opacity-70"
           >
-
             <svg
               className="h-5 w-5"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
-
               <circle
                 cx="12"
                 cy="12"
@@ -521,21 +614,20 @@ function App() {
                 points="10,8.5 16,12 10,15.5"
                 fill="black"
               />
-
             </svg>
 
             <span>
               YT Music
             </span>
-
           </a>
 
         </div>
 
       </nav>
 
-
-      {/* ================= CENTER ================= */}
+      {/* =================================================
+          CENTER TITLE
+      ================================================= */}
 
       <section className="absolute inset-0 z-20 flex items-center justify-center -translate-y-40">
 
@@ -549,39 +641,43 @@ function App() {
 
       </section>
 
-
-      {/* ================= AUDIO ================= */}
+      {/* =================================================
+          AUDIO
+      ================================================= */}
 
       <audio
-  ref={audioRef}
-  src={song.src}
-  preload="metadata"
-/>
+        ref={audioRef}
+        src={song.file}
+        preload="metadata"
+      />
 
-
-      {/* ================= MUSIC PLAYER ================= */}
+      {/* =================================================
+          MUSIC PLAYER
+      ================================================= */}
 
       <div className="absolute bottom-[82px] left-1/2 z-50 w-[90%] max-w-2xl -translate-x-1/2">
 
         <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#79392f]/20 px-4 py-3 text-white shadow-2xl backdrop-blur-md">
 
+          {/* =================================================
+              ALBUM IMAGE
+          ================================================= */}
 
-          {/* ================= ALBUM IMAGE ================= */}
+          <div className="hidden h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white/30 sm:block">
 
-         <div className="hidden h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white/30 sm:block">
+            <img
+              src="/im.png"
+              alt="Music"
+              className={`h-full w-full object-cover music-disc ${
+                isPlaying ? "playing" : ""
+              }`}
+            />
 
-  <img
-    src="/im.png"
-    alt="Music"
-    className={`h-full w-full object-cover music-disc ${
-      isPlaying ? "playing" : ""
-    }`}
-  />
+          </div>
 
-</div>
-
-
-          {/* ================= SONG INFORMATION ================= */}
+          {/* =================================================
+              SONG INFORMATION
+          ================================================= */}
 
           <div className="min-w-0 flex-1">
 
@@ -593,8 +689,9 @@ function App() {
               {song.artist}
             </p>
 
-
-            {/* ================= PROGRESS BAR ================= */}
+            {/* =================================================
+                PROGRESS BAR
+            ================================================= */}
 
             <div className="relative mt-3 h-1 w-full">
 
@@ -622,7 +719,6 @@ function App() {
 
             </div>
 
-
             {/* TIME */}
 
             <p className="mt-1 text-[10px] text-white/70">
@@ -631,11 +727,11 @@ function App() {
 
           </div>
 
+          {/* =================================================
+              MUSIC CONTROLS
+          ================================================= */}
 
-          {/* ================= MUSIC CONTROLS ================= */}
-
-          <div className="flex items-center gap-5">
-
+          <div className="flex items-center gap-4">
 
             {/* PREVIOUS */}
 
@@ -644,26 +740,29 @@ function App() {
               className="hidden items-center justify-center text-white outline-none transition-all duration-200 hover:scale-110 hover:opacity-70 md:flex"
               aria-label="Previous song"
             >
+
               <svg
-                width="18"
-                height="18"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
               >
+
                 <path
                   d="M6 5V19"
                   stroke="white"
                   strokeWidth="2"
                   strokeLinecap="round"
                 />
+
                 <path
                   d="M18 6L10 12L18 18V6Z"
                   fill="white"
                 />
-              </svg>
-            </button>
 
+              </svg>
+
+            </button>
 
             {/* PLAY / PAUSE */}
 
@@ -698,7 +797,6 @@ function App() {
 
             </button>
 
-
             {/* NEXT */}
 
             <button
@@ -706,24 +804,28 @@ function App() {
               className="hidden items-center justify-center text-white outline-none transition-all duration-200 hover:scale-110 hover:opacity-70 md:flex"
               aria-label="Next song"
             >
+
               <svg
-                width="18"
-                height="18"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
               >
+
                 <path
                   d="M18 5V19"
                   stroke="white"
                   strokeWidth="2"
                   strokeLinecap="round"
                 />
+
                 <path
                   d="M6 6L14 12L6 18V6Z"
                   fill="white"
                 />
+
               </svg>
+
             </button>
 
           </div>
