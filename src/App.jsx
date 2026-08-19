@@ -28,128 +28,156 @@ function App() {
 
   /* ================= SONGS ================= */
 
-  const songs = [
+ const songs = [
   {
+    id: 1,
     title: "Anyway",
     artist: "ANYWAY",
     src: "/Anyway - ANYWAY (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 2,
     title: "Arhe So Jhde",
     artist: "ANYWAY",
     src: "/Arhe So Jhde - ANYWAY (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 3,
     title: "Bholi Si Surat",
     artist: "Dil To Pagal Hai",
     src: "/Bholi Si Surat - Dil To Pagal Hai (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 4,
     title: "California Love",
     artist: "ANYWAY",
     src: "/California Love - ANYWAY (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 5,
     title: "Chaal Patlo",
     artist: "Jass Dhaliwal & Rouble Malhi",
     src: "/Chaal Patlo - Jass Dhaliwal & Rouble Malhi (Mr-Punjab.Com).mp3",
     image: "/im.png",
   },
   {
-    title: "Cheema Y Intro",
+    id: 6,
+    title: "Cheema Y (Intro)",
     artist: "ANYWAY",
     src: "/Cheema Y (Intro) - ANYWAY (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 7,
+    title: "Dhadkan",
+    artist: "Romy Ranjan",
+    src: "/Dhadkan - Romy Ranjan.mp3",
+    image: "/im.png",
+  },
+  {
+    id: 8,
     title: "Dil To Pagal Hai",
     artist: "Dil To Pagal Hai",
     src: "/Dil To Pagal Hai - Dil To Pagal Hai (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 9,
     title: "EX-FILES",
     artist: "Baggh-E SMG",
     src: "/EX-FILES - Baggh-E SMG.mp3",
     image: "/im.png",
   },
   {
+    id: 10,
     title: "Feem Feem",
-    artist: "Sardar Khehra, Gur Brar & Rahul Sidhu",
+    artist: "Sardar Khehra & Gur Brar & Rahul Sidhu",
     src: "/Feem Feem - Sardar Khehra & Gur Brar & Rahul Sidhu (Mr-Punjab.Com).mp3",
     image: "/im.png",
   },
   {
+    id: 11,
     title: "Freestyle",
     artist: "Jas Dhaliwal",
     src: "/Freestyle - Jas Dhaliwal (Mr-Punjab.Com).mp3",
     image: "/im.png",
   },
   {
+    id: 12,
     title: "Gun Culture",
     artist: "Cloud 9",
     src: "/Gun Culture - Cloud 9 (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 13,
     title: "Haske",
     artist: "Cloud 9",
     src: "/Haske - Cloud 9 (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 14,
     title: "Jogi",
     artist: "Jxggi & Hxrmxn",
     src: "/Jogi - Jxggi & Hxrmxn (Mr-Punjab.Com).mp3",
     image: "/im.png",
   },
   {
+    id: 15,
     title: "Khat",
     artist: "Khat",
     src: "/Khat - Khat (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 16,
     title: "Koi Ladki Hai",
     artist: "Dil To Pagal Hai",
     src: "/Koi Ladki Hai - Dil To Pagal Hai (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 17,
     title: "Malpur De Munde",
     artist: "Singga",
     src: "/Malpur De Munde - Singga (Mr-Punjab.Com).mp3",
     image: "/im.png",
   },
   {
+    id: 18,
     title: "NYPD",
     artist: "F.A.T.H.E.R",
     src: "/NYPD - F.A.T.H.E.R (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 19,
     title: "Proper Patola",
     artist: "Proper Patola",
     src: "/Proper Patola - Proper Patola (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 20,
     title: "Snap",
     artist: "Cloud 9",
     src: "/Snap - Cloud 9 (320 kbps).mp3",
     image: "/im.png",
   },
   {
+    id: 21,
     title: "Tequila Shot",
     artist: "Proper Patola",
     src: "/Tequila Shot - Proper Patola (320 kbps).mp3",
     image: "/im.png",
   },
 ];
+
   /* ================= MUSIC STATE ================= */
 
   const audioRef = useRef(null);
