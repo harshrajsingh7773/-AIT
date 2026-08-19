@@ -32,72 +32,122 @@ function App() {
   {
     title: "Anyway",
     artist: "ANYWAY",
-    file: "/Anyway - ANYWAY (320 kbps).mp3",
+    src: "/Anyway - ANYWAY (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Arhe So Jhde",
     artist: "ANYWAY",
-    file: "/Arhe So Jhde - ANYWAY (320 kbps).mp3",
+    src: "/Arhe So Jhde - ANYWAY (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Bholi Si Surat",
     artist: "Dil To Pagal Hai",
-    file: "/Bholi Si Surat - Dil To Pagal Hai (320 kbps).mp3",
+    src: "/Bholi Si Surat - Dil To Pagal Hai (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "California Love",
     artist: "ANYWAY",
-    file: "/California Love - ANYWAY (320 kbps).mp3",
+    src: "/California Love - ANYWAY (320 kbps).mp3",
+    image: "/im.png",
   },
   {
-    title: "Cheema (Y Intro)",
+    title: "Chaal Patlo",
+    artist: "Jass Dhaliwal & Rouble Malhi",
+    src: "/Chaal Patlo - Jass Dhaliwal & Rouble Malhi (Mr-Punjab.Com).mp3",
+    image: "/im.png",
+  },
+  {
+    title: "Cheema Y Intro",
     artist: "ANYWAY",
-    file: "/Cheema (Y Intro) - ANYWAY (320 kbps).mp3",
+    src: "/Cheema Y (Intro) - ANYWAY (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Dil To Pagal Hai",
     artist: "Dil To Pagal Hai",
-    file: "/Dil To Pagal Hai - Dil To Pagal Hai (320 kbps).mp3",
+    src: "/Dil To Pagal Hai - Dil To Pagal Hai (320 kbps).mp3",
+    image: "/im.png",
+  },
+  {
+    title: "EX-FILES",
+    artist: "Baggh-E SMG",
+    src: "/EX-FILES - Baggh-E SMG.mp3",
+    image: "/im.png",
+  },
+  {
+    title: "Feem Feem",
+    artist: "Sardar Khehra, Gur Brar & Rahul Sidhu",
+    src: "/Feem Feem - Sardar Khehra & Gur Brar & Rahul Sidhu (Mr-Punjab.Com).mp3",
+    image: "/im.png",
+  },
+  {
+    title: "Freestyle",
+    artist: "Jas Dhaliwal",
+    src: "/Freestyle - Jas Dhaliwal (Mr-Punjab.Com).mp3",
+    image: "/im.png",
   },
   {
     title: "Gun Culture",
     artist: "Cloud 9",
-    file: "/Gun Culture - Cloud 9 (320 kbps).mp3",
+    src: "/Gun Culture - Cloud 9 (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Haske",
     artist: "Cloud 9",
-    file: "/Haske - Cloud 9 (320 kbps).mp3",
+    src: "/Haske - Cloud 9 (320 kbps).mp3",
+    image: "/im.png",
+  },
+  {
+    title: "Jogi",
+    artist: "Jxggi & Hxrmxn",
+    src: "/Jogi - Jxggi & Hxrmxn (Mr-Punjab.Com).mp3",
+    image: "/im.png",
   },
   {
     title: "Khat",
     artist: "Khat",
-    file: "/Khat - Khat (320 kbps).mp3",
+    src: "/Khat - Khat (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Koi Ladki Hai",
     artist: "Dil To Pagal Hai",
-    file: "/Koi Ladki Hai - Dil To Pagal Hai (320 kbps).mp3",
+    src: "/Koi Ladki Hai - Dil To Pagal Hai (320 kbps).mp3",
+    image: "/im.png",
+  },
+  {
+    title: "Malpur De Munde",
+    artist: "Singga",
+    src: "/Malpur De Munde - Singga (Mr-Punjab.Com).mp3",
+    image: "/im.png",
   },
   {
     title: "NYPD",
     artist: "F.A.T.H.E.R",
-    file: "/NYPD - F.A.T.H.E.R (320 kbps).mp3",
+    src: "/NYPD - F.A.T.H.E.R (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Proper Patola",
     artist: "Proper Patola",
-    file: "/Proper Patola - Proper Patola (320 kbps).mp3",
+    src: "/Proper Patola - Proper Patola (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Snap",
     artist: "Cloud 9",
-    file: "/Snap - Cloud 9 (320 kbps).mp3",
+    src: "/Snap - Cloud 9 (320 kbps).mp3",
+    image: "/im.png",
   },
   {
     title: "Tequila Shot",
     artist: "Proper Patola",
-    file: "/Tequila Shot - Proper Patola (320 kbps).mp3",
+    src: "/Tequila Shot - Proper Patola (320 kbps).mp3",
+    image: "/im.png",
   },
 ];
   /* ================= MUSIC STATE ================= */
@@ -260,48 +310,66 @@ function App() {
 
       {/* ================= SMOOTH CLOCK ================= */}
 
-      <style>
-        {`
-          @keyframes smoothBlink {
-            0%,
-            42% {
-              opacity: 1;
-            }
+     <style>
+  {`
+    @keyframes smoothBlink {
+      0%,
+      42% {
+        opacity: 1;
+      }
 
-            50% {
-              opacity: 0.15;
-            }
+      50% {
+        opacity: 0.15;
+      }
 
-            58%,
-            100% {
-              opacity: 1;
-            }
-          }
+      58%,
+      100% {
+        opacity: 1;
+      }
+    }
 
-          .clock-colon {
-            animation: smoothBlink 1.2s ease-in-out infinite;
-          }
+    .clock-colon {
+      animation: smoothBlink 1.2s ease-in-out infinite;
+    }
 
-          input[type="range"] {
-            appearance: none;
-            -webkit-appearance: none;
-          }
+    .music-disc {
+      animation: rotateDisc 8s linear infinite;
+      animation-play-state: paused;
+    }
 
-          input[type="range"]::-webkit-slider-thumb {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 0;
-            height: 0;
-          }
+    .music-disc.playing {
+      animation-play-state: running;
+    }
 
-          input[type="range"]::-moz-range-thumb {
-            width: 0;
-            height: 0;
-            border: 0;
-          }
-        `}
-      </style>
+    @keyframes rotateDisc {
+      from {
+        transform: rotate(0deg);
+      }
 
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    input[type="range"] {
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 0;
+      height: 0;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 0;
+      height: 0;
+      border: 0;
+    }
+  `}
+</style>
 
       {/* ================= DARK OVERLAY ================= */}
 
@@ -336,7 +404,7 @@ function App() {
           <span className="h-2.5 w-2.5 rounded-full bg-green-400 shadow-[0_0_10px_rgba(74,222,128,1)]" />
 
           <span>
-            27 online
+            2 online
           </span>
 
         </div>
@@ -445,7 +513,7 @@ function App() {
 
         <div className="text-center text-white drop-shadow-[0_6px_15px_rgba(0,0,0,0.5)]">
 
-          <h1 className="text-7xl font-black md:text-[130px]">
+          <h1 className="text-7xl font-black md:text-[150px]">
             हार्ड AIT
           </h1>
 
@@ -465,22 +533,24 @@ function App() {
 
       {/* ================= MUSIC PLAYER ================= */}
 
-      <div className="absolute bottom-[72px] left-1/2 z-50 w-[90%] max-w-2xl -translate-x-1/2">
+      <div className="absolute bottom-[82px] left-1/2 z-50 w-[90%] max-w-2xl -translate-x-1/2">
 
-        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#79392f]/90 px-4 py-3 text-white shadow-2xl backdrop-blur-md">
+        <div className="flex items-center gap-4 rounded-full border border-white/20 bg-[#79392f]/20 px-4 py-3 text-white shadow-2xl backdrop-blur-md">
 
 
           {/* ================= ALBUM IMAGE ================= */}
 
-          <div className="hidden h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white/30 sm:block">
+         <div className="hidden h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white/30 sm:block">
 
-            <img
-              src="/im.png"
-              alt="Music"
-              className="h-full w-full object-cover"
-            />
+  <img
+    src="/im.png"
+    alt="Music"
+    className={`h-full w-full object-cover music-disc ${
+      isPlaying ? "playing" : ""
+    }`}
+  />
 
-          </div>
+</div>
 
 
           {/* ================= SONG INFORMATION ================= */}
@@ -536,17 +606,34 @@ function App() {
 
           {/* ================= MUSIC CONTROLS ================= */}
 
-          <div className="flex items-center gap-7">
+          <div className="flex items-center gap-5">
 
 
             {/* PREVIOUS */}
 
             <button
               onClick={previousSong}
-              className="hidden text-xl font-semibold text-white outline-none transition hover:scale-110 md:block"
+              className="hidden items-center justify-center text-white outline-none transition-all duration-200 hover:scale-110 hover:opacity-70 md:flex"
               aria-label="Previous song"
             >
-              ‹
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 5V19"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M18 6L10 12L18 18V6Z"
+                  fill="white"
+                />
+              </svg>
             </button>
 
 
@@ -588,10 +675,27 @@ function App() {
 
             <button
               onClick={nextSong}
-              className="hidden text-xl font-semibold text-white outline-none transition hover:scale-110 md:block"
+              className="hidden items-center justify-center text-white outline-none transition-all duration-200 hover:scale-110 hover:opacity-70 md:flex"
               aria-label="Next song"
             >
-              ›
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 5V19"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M6 6L14 12L6 18V6Z"
+                  fill="white"
+                />
+              </svg>
             </button>
 
           </div>
